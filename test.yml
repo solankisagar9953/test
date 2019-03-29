@@ -1,0 +1,23 @@
+version: 0.1
+
+#env:
+#  variables:
+#    JAVA_HOME: "/usr/lib/jvm/java-8-openjdk-amd64"
+
+phases:
+  install:
+    commands:
+      - echo Commands
+  build:
+    commands:
+      - git status
+      - pwd
+      - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
+      - git checkout $CODEBUILD_RESOLVED_SOURCE_VERSION
+      - git status; echo #####
+      - git diff develop
+  post_build:
+    commands:
+      - echo Build completed
+      - export FOO=BAR
+      - echo '$FOO'| envsubst '$FOO'
